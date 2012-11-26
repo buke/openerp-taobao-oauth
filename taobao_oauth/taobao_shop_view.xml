@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- res.partner form 视图-->
+        <record id="view_taobao_shop_form_oauth" model="ir.ui.view">
+            <field name="name">view_taobao_shop_form_oauth</field>
+            <field name="model">taobao.shop</field>
+            <field name="inherit_id" ref="taobao.view_taobao_shop_form" />
+            <field name="arch" type="xml">
+                <field name="taobao_session_key" position="after">
+                    <newline />
+                    <button name="taobao_oauth"
+                        string="获取taobao session key" type="object" icon="gtk-zoom-in" help="淘宝B/S架构专用。如果淘宝top 应用为C/S架构无需获取"/>
+                    <newline />
+                    <field name="expires_datetime" readonly="1"/>
+                    <newline />
+                    <field name="access_token" readonly="1"/>
+                    <field name="token_type" readonly="1"/>
+                    <field name="expires_in" readonly="1"/>
+                    <field name="refresh_token" readonly="1"/>
+                    <field name="re_expires_in" readonly="1"/>
+                    <field name="r1_expires_in" readonly="1"/>
+                    <field name="w1_expires_in" readonly="1"/>
+                    <field name="w2_expires_in" readonly="1"/>
+                    <newline />
+                </field>
+
+            </field>
+        </record>
+
+
+        <!--cron-->
+        <record id="ir_cron_taobao_refresh_session" model="ir.cron">
+            <field name="name">Taobao Refresh Session</field>
+            <field name="interval_number">4</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model">taobao.shop</field>
+            <field name="function">refresh_session</field>
+            <field name="args">()</field>
+        </record>
+
+
+
+    </data>
+</openerp>
+
