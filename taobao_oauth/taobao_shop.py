@@ -60,6 +60,7 @@ class taobao_shop(osv.osv, TaobaoMixin):
         params['redirect_uri'] = web_root_url + '/taobao/%s/%d' % (cr.dbname, ids[0])
         params['client_id'] = shop.taobao_app_key
         params['response_type'] = 'code'
+        params['view'] = 'web'
         url = 'https://oauth.taobao.com/authorize?%s' % urllib.urlencode(params)
 
         return {

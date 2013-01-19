@@ -89,6 +89,7 @@ class TaobaoOauth(openerpweb.Controller):
                     client_secret = shop.taobao_app_secret,
                     grant_type = 'authorization_code',
                     code = kwargs.get('code', None),
+                    view = 'web',
                     redirect_uri = req.httprequest.url_root[:-1] + req.httprequest.path
                     )
             cr.commit()
